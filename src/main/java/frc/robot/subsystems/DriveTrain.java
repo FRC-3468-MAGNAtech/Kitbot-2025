@@ -8,6 +8,7 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -24,13 +25,11 @@ public class DriveTrain extends SubsystemBase {
     SparkMax rightFront = new SparkMax(DriveConstants.FrontRightID, MotorType.kBrushless);
     SparkMax rightRear = new SparkMax(DriveConstants.BackRightID, MotorType.kBrushless);
 
-
     SparkMaxConfig leftDriveConf = new SparkMaxConfig();
-    SparkMaxConfig rightDriveConf = new SparkMaxConfig();
-    
-    leftDriveConf.follow(DriveConstants.FrontLeftID, true);
+    leftDriveConf.follow(DriveConstants.FrontLeftID, false);
     leftRear.configure(leftDriveConf, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
 
+    SparkMaxConfig rightDriveConf = new SparkMaxConfig();
     rightDriveConf.follow(DriveConstants.FrontRightID,false);
     rightRear.configure(rightDriveConf, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
 

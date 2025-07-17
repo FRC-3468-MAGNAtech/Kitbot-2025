@@ -15,13 +15,12 @@ package frc.robot;
 public final class Constants {
 
   public static class DriveConstants {
-    public static final int FrontLeftID = 0;
-    public static final int BackLeftID = 0;
-    public static final int FrontRightID = 0;
-    public static final int BackRightID = 0;
+    public static final int FrontLeftID = 6;
+    public static final int BackLeftID = 5;
+    public static final int FrontRightID = 8;
+    public static final int BackRightID = 7;
     public static final int CurrentLimit = 40;
   }
-
 
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
