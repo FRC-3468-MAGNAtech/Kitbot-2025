@@ -4,11 +4,41 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.config.SoftLimitConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.ClimberConstants;
 
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
-  public Climber() {}
+  private SparkMax ClimberMotor;
+  SoftLimitConfig reverseLimit;
+ 
+  public Climber() {
+    //reverseLimit.reverseSoftLimit(0.1);
+  
+    ClimberMotor = new SparkMax(ClimberConstants.ClimberID, MotorType.kBrushless);
+    SparkMaxConfig config = new SparkMaxConfig();
+    config.idleMode(IdleMode.kBrake);
+    config.inverted(false);
+
+    ClimberMotor.configure(config, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+  }
+    public void climbUp() {
+      ClimberMotor.set(8.5);
+    }
+    public void climbDown() {
+      ClimberMotor.set(-1);
+    }
+    public void climbStop() {
+      ClimberMotor.set(0);
+    }
 
   @Override
   public void periodic() {

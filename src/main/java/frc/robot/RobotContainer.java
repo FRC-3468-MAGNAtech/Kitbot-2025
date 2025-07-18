@@ -7,11 +7,16 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Climber.ClimbDown;
+import frc.robot.commands.Climber.ClimbUp;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -23,6 +28,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
 
   private final DriveTrain m_DriveTrain = new DriveTrain();
+  private final Climber m_Climber = new Climber();
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -30,6 +36,9 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
+
+  private final CommandXboxController m_driverController2 =
+      new CommandXboxController(OperatorConstants.kDriverControllerPort2);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -59,10 +68,14 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_DriveTrain.arcadeDrive(
-                          -m_driverController.getLeftY(), -m_driverController.getLeftX()),
+                          m_driverController.getRightX(), m_driverController.getLeftY()),
             m_DriveTrain));
-  }
 
+    m_driverController2.leftTrigger().whileTrue(new ClimbDown(m_Climber));
+    m_driverController2.rightTrigger().whileTrue(new ClimbUp(m_Climber));
+
+
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
