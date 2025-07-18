@@ -7,13 +7,21 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Arm.ArmDown;
+import frc.robot.commands.Arm.ArmUp;
+import frc.robot.commands.Arm.IntakePos;
+import frc.robot.commands.Arm.StorePos;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
+import frc.robot.commands.Intake.Extake;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -29,6 +37,8 @@ public class RobotContainer {
 
   private final DriveTrain m_DriveTrain = new DriveTrain();
   private final Climber m_Climber = new Climber();
+  private final Intake m_Intake = new Intake();
+  private final Arm m_arm = new Arm();
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -71,8 +81,16 @@ public class RobotContainer {
                           m_driverController.getRightX(), m_driverController.getLeftY()),
             m_DriveTrain));
 
+    m_arm.setDefaultCommand(new StorePos(m_arm));
+
     m_driverController2.leftTrigger().whileTrue(new ClimbDown(m_Climber));
     m_driverController2.rightTrigger().whileTrue(new ClimbUp(m_Climber));
+
+    m_driverController2.x().whileTrue(new ParallelCommandGroup(new frc.robot.commands.Intake.Intake(m_Intake), new IntakePos(m_arm))); //needs PID for arm
+    m_driverController2.y().whileTrue(new Extake(m_Intake));
+
+    m_driverController2.leftBumper().whileTrue(new ArmDown(m_arm));
+    m_driverController2.rightBumper().whileTrue(new ArmUp(m_arm));
 
 
   }

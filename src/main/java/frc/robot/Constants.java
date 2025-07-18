@@ -30,4 +30,17 @@ public final class Constants {
   public static class ClimberConstants {
     public static final int ClimberID = 9 ;
   }
+
+  public static class IntakeConstants {
+    public static final int intakeID = 11;
+    public static final double intake = 0.5;
+    public static final double extake = -0.5;
+  }
+
+  public static class ArmConstants {
+    public static final int armID = 10;
+    
+    public static final double outSetpoint = 100;
+    public static final double inSetpoint = 0;
+  }
 }
