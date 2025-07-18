@@ -86,7 +86,7 @@ public class RobotContainer {
     m_driverController2.leftTrigger().whileTrue(new ClimbDown(m_Climber));
     m_driverController2.rightTrigger().whileTrue(new ClimbUp(m_Climber));
 
-    m_driverController2.x().whileTrue(new ParallelCommandGroup(new frc.robot.commands.Intake.Intake(m_Intake), new IntakePos(m_arm))); //needs PID for arm
+    m_driverController2.x().whileTrue(new frc.robot.commands.Intake.Intake(m_Intake)); //needs PID for arm
     m_driverController2.y().whileTrue(new Extake(m_Intake));
 
     m_driverController2.leftBumper().whileTrue(new ArmDown(m_arm));

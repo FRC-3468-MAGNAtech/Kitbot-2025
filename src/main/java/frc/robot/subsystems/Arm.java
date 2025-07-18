@@ -38,11 +38,11 @@ public class Arm extends SubsystemBase {
   }
 
   public void armUp() {
-    armMtr.set(0.05);
+    armMtr.set(0.3);
   }
 
   public void armDown() {
-    armMtr.set(-0.05);
+    armMtr.set(-0.3);
   }
 
   public void armStop() {
