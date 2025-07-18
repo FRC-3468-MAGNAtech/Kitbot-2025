@@ -25,10 +25,17 @@ public class DriveTrain extends SubsystemBase {
     SparkMax rightFront = new SparkMax(DriveConstants.FrontRightID, MotorType.kBrushless);
     SparkMax rightRear = new SparkMax(DriveConstants.BackRightID, MotorType.kBrushless);
 
+    SparkMaxConfig currentLimitConfig = new SparkMaxConfig();
+    currentLimitConfig.smartCurrentLimit(40);
+    currentLimitConfig.follow(DriveConstants.FrontLeftID,false);
+    currentLimitConfig.follow(DriveConstants.FrontRightID,false);
+    currentLimitConfig.follow(DriveConstants.BackLeftID,false);
+    currentLimitConfig.follow(DriveConstants.BackRightID,false);
+    
     SparkMaxConfig leftDriveConf = new SparkMaxConfig();
     leftDriveConf.follow(DriveConstants.FrontLeftID, false);
     leftRear.configure(leftDriveConf, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
-
+  
     SparkMaxConfig rightDriveConf = new SparkMaxConfig();
     rightDriveConf.follow(DriveConstants.FrontRightID,false);
     rightRear.configure(rightDriveConf, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);

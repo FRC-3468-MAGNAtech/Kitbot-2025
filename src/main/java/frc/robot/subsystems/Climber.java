@@ -21,12 +21,13 @@ public class Climber extends SubsystemBase {
   SoftLimitConfig reverseLimit;
  
   public Climber() {
-    //reverseLimit.reverseSoftLimit(0.1);
+    
   
     ClimberMotor = new SparkMax(ClimberConstants.ClimberID, MotorType.kBrushless);
     SparkMaxConfig config = new SparkMaxConfig();
     config.idleMode(IdleMode.kBrake);
     config.inverted(false);
+    config.smartCurrentLimit(40);
 
     ClimberMotor.configure(config, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
   }

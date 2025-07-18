@@ -26,13 +26,11 @@ public class Arm extends SubsystemBase {
     armMtr = new SparkMax(ArmConstants.armID, MotorType.kBrushless);
 
     SparkMaxConfig config = new SparkMaxConfig();
-
     config.closedLoop.pid(0.001, 0, 0.0017);
     config.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
     config.idleMode(IdleMode.kBrake);
-
+    config.smartCurrentLimit(40);
     config.closedLoopRampRate(0.5);
-
     armEncoder = armMtr.getAbsoluteEncoder();
     armPID = armMtr.getClosedLoopController();
   }
