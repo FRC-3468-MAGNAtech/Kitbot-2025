@@ -78,7 +78,7 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_DriveTrain.arcadeDrive(
-                          m_driverController.getRightX(), m_driverController.getLeftY()),
+                          m_driverController.getRightX() * 0.5, m_driverController.getLeftY()),
             m_DriveTrain));
 
     m_arm.setDefaultCommand(new StorePos(m_arm));
@@ -101,6 +101,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return Autos.driveForward(m_DriveTrain);
   }
 }
