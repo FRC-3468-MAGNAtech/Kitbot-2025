@@ -74,6 +74,8 @@ public class RobotContainer {
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
+
+    // This is where we slowed down the joysticks for drive speed/
     m_DriveTrain.setDefaultCommand(
         new RunCommand(
             () ->
