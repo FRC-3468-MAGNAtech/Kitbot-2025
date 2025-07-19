@@ -9,7 +9,7 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Arm.ArmDown;
 import frc.robot.commands.Arm.ArmUp;
-import frc.robot.commands.Arm.IntakePos;
+//import frc.robot.commands.Arm.IntakePos;
 import frc.robot.commands.Arm.StorePos;
 import frc.robot.commands.Climber.ClimbDown;
 import frc.robot.commands.Climber.ClimbUp;
@@ -19,12 +19,12 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
-import edu.wpi.first.wpilibj.XboxController;
+//import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+//import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -78,8 +78,9 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_DriveTrain.arcadeDrive(
-                          m_driverController.getRightX() * 0.5, m_driverController.getLeftY()),
+                          m_driverController.getRightX() * 0.5, m_driverController.getLeftY() * 0.5),
             m_DriveTrain));
+    //this is a comment
 
     m_arm.setDefaultCommand(new StorePos(m_arm));
 
